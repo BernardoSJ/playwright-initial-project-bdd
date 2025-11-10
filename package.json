@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "@faker-js/faker": "^10.0.0",
+    "@playwright/test": "^1.55.1",
+    "@types/node": "^24.5.2",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report reports/html",
+    "report:full": "playwright show-report",
+    "format": "prettier --write .",
+    "test:report": "playwright test",
+    "format:check": "prettier --check ."
+  }
+}
