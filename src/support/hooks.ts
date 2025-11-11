@@ -9,7 +9,7 @@ const pick = (name?: string) => name === 'firefox' ? firefox : name === 'webkit'
 Before(async function (this: CustomWorld) {
   const pw = pick(this.browserName);
   this.browser = await pw.launch({ headless: true });
-  this.context = await this.browser.newContext({ recordVideo: { dir: 'test-results/videos' } });
+  this.context = await this.browser.newContext({ baseURL: 'https://www.saucedemo.com', recordVideo: { dir: 'test-results/videos' } });
   this.page = await this.context.newPage();
   if (process.env.TRACE === '1') {
     await this.context.tracing.start({ screenshots: true, snapshots: true, sources: true });

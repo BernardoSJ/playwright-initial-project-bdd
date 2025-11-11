@@ -1,7 +1,10 @@
+@login
 Feature: Login
+  As a valid user
+  I want to log in successfully
+  So that I can access the inventory page
 
-  @login
   Scenario: Successful Login
     Given I am on the login page
-    When I log in with credentials "standard_user" and "secret_sauce"
-    Then I should be able to see the inventory
+    When I login with valid credentials
+    Then I should be redirected to the inventory page
