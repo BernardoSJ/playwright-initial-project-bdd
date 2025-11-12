@@ -4,18 +4,18 @@
     "@faker-js/faker": "^10.0.0",
     "@playwright/test": "^1.55.1",
     "@types/node": "^24.5.2",
+    "cross-env": "^10.1.0",
+    "playwright": "^1.55.1",
     "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.3"
   },
   "scripts": {
-    "test": "playwright test",
-    "test:headed": "playwright test --headed",
-    "test:ui": "playwright test --ui",
-    "report": "playwright show-report reports/html",
-    "report:full": "playwright show-report",
-    "format": "prettier --write .",
-    "test:report": "playwright test",
-    "format:check": "prettier --check ."
+    "cucumber": "cucumber-js --require ./src/steps/**/*.ts --require ./src/support/**/*.ts",
+    "cucumber:smoke": "cucumber-js --tags '@smoke and not @wip'",
+    "cucumber:chromium": "cross-env BROWSER=chromium cucumber-js",
+    "cucumber:firefox": "cross-env BROWSER=firefox cucumber-js",
+    "cucumber:webkit": "cross-env BROWSER=webkit cucumber-js"
   }
 }
