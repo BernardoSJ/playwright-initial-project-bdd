@@ -14,11 +14,6 @@ Then('the cart badge should show {int}', async function (n: number) {
   await cart.assertNumberOfProducts(n);
 });
 
-When('I open the cart', async function () {
-  const cart = new CartPage(this.page);
-  await cart.goToCart();
-});
-
 Then('I should see the same {int} product names in the cart', async function (n: number) {
   const cart = new CartPage(this.page);
   const current = await cart.getProductsNames();
