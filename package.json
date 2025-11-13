@@ -13,9 +13,12 @@
   },
   "scripts": {
     "cucumber": "cucumber-js --require ./src/steps/**/*.ts --require ./src/support/**/*.ts",
-    "cucumber:smoke": "cucumber-js --tags '@smoke and not @wip'",
     "cucumber:chromium": "cross-env BROWSER=chromium cucumber-js",
     "cucumber:firefox": "cross-env BROWSER=firefox cucumber-js",
-    "cucumber:webkit": "cross-env BROWSER=webkit cucumber-js"
+    "cucumber:webkit": "cross-env BROWSER=webkit cucumber-js",
+    "bdd:inv": "cucumber-js --tags @inventory --retry 0",
+    "bdd:cart": "cucumber-js --tags @cart --retry 0",
+    "bdd:chk": "cucumber-js --tags @checkout --retry 0",
+    "bdd:run3": "npm run bdd:chk && npm run bdd:chk && npm run bdd:chk"
   }
 }

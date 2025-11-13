@@ -11,6 +11,8 @@ Before(async function (this: CustomWorld) {
   this.browser = await pw.launch({ headless: true });
   this.context = await this.browser.newContext({ baseURL: 'https://www.saucedemo.com', recordVideo: { dir: 'test-results/videos' } });
   this.page = await this.context.newPage();
+  this.page.setDefaultTimeout(5_000);
+  this.page.setDefaultNavigationTimeout(15_000);
   if (process.env.TRACE === '1') {
     await this.context.tracing.start({ screenshots: true, snapshots: true, sources: true });
   }
