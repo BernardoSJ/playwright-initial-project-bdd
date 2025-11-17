@@ -1,6 +1,5 @@
 # 🎭 Playwright Initial Project With BDD
 
-
 ## 🧑‍💻 Author
 
 **Bernardo Salinas Jáquez**

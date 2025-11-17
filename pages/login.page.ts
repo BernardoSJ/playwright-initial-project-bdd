@@ -11,7 +11,7 @@ export class LoginPage {
     this.page = page;
     this.userTextBox = page.getByRole('textbox', { name: 'Username' });
     this.passTextBox = page.getByRole('textbox', { name: 'Password' });
-    this.loginButton = page.getByRole('button', { name: 'Login'});
+    this.loginButton = page.getByRole('button', { name: 'Login' });
     this.errorMessage = page.locator('[data-test="error"]');
   }
 

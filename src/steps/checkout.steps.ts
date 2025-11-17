@@ -17,7 +17,7 @@ When('I proceed to checkout', async function () {
 
 When('I complete the checkout form with random customer data', async function () {
   const checkout = new CheckoutPage(this.page);
-  const c = buildCustomer();      
+  const c = buildCustomer();
   await checkout.fillCheckoutDetails(c.firstName, c.lastName, c.zip);
   await checkout.clickFinishButton();
 });
@@ -33,4 +33,4 @@ Then('I should stay on checkout step one with a required fields error', async fu
   await checkout.continueButton.click();
   await checkout.assertErrorMessage();
   await expect(this.page).toHaveURL(/checkout-step-one\.html$/);
-})
+});

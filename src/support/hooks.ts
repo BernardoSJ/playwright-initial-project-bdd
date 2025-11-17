@@ -4,12 +4,16 @@ import { CustomWorld } from './world';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const pick = (name?: string) => name === 'firefox' ? firefox : name === 'webkit' ? webkit : chromium;
+const pick = (name?: string) =>
+  name === 'firefox' ? firefox : name === 'webkit' ? webkit : chromium;
 
 Before(async function (this: CustomWorld) {
   const pw = pick(this.browserName);
   this.browser = await pw.launch({ headless: true });
-  this.context = await this.browser.newContext({ baseURL: 'https://www.saucedemo.com', recordVideo: { dir: 'test-results/videos' } });
+  this.context = await this.browser.newContext({
+    baseURL: 'https://www.saucedemo.com',
+    recordVideo: { dir: 'test-results/videos' },
+  });
   this.page = await this.context.newPage();
   this.page.setDefaultTimeout(5_000);
   this.page.setDefaultNavigationTimeout(15_000);
@@ -25,9 +29,13 @@ After(async function (this: CustomWorld, scenario) {
   if (failed || process.env.TRACE === '1') {
     const out = path.join('test-results', 'traces', `${slug}.zip`);
     fs.mkdirSync(path.dirname(out), { recursive: true });
-    try { await this.context.tracing.stop({ path: out }); } catch {}
+    try {
+      await this.context.tracing.stop({ path: out });
+    } catch {}
   } else {
-    try { await this.context.tracing.stop(); } catch {}
+    try {
+      await this.context.tracing.stop();
+    } catch {}
   }
 
   const video = this.page.video();

@@ -11,7 +11,7 @@ export class InventoryPage {
     this.page = page;
     this.titleText = page.locator('.title');
     this.sortSelect = page.locator('[data-test="product-sort-container"]');
-    this.addToCartButtons = page.getByRole('button', { name: 'Add to cart'});
+    this.addToCartButtons = page.getByRole('button', { name: 'Add to cart' });
     this.productDetails = page.locator('.inventory_item_name');
   }
 
@@ -23,7 +23,7 @@ export class InventoryPage {
     const inventoryUrl = '/inventory.html';
     for (let i = 0; i < n; i++) {
       await this.productDetails.nth(i).click();
-      await expect(this.page).not.toHaveURL(/inventory\.html$/)
+      await expect(this.page).not.toHaveURL(/inventory\.html$/);
       await this.page.goBack();
       await expect(this.page).toHaveURL(new RegExp(`${inventoryUrl}$`));
     }
@@ -35,35 +35,37 @@ export class InventoryPage {
   }
 
   async addProducts(n: number): Promise<string[]> {
-    const productsName:string[] = [];
+    const productsName: string[] = [];
 
     const items = this.page.locator('.inventory_item');
     const count = Math.min(n, await items.count());
 
     for (let i = 0; i < count; i++) {
       const currentItem = items.nth(i);
-      const currentName = (await currentItem.locator('.inventory_item_name').innerText());
+      const currentName = await currentItem.locator('.inventory_item_name').innerText();
 
       await currentItem.locator('[data-test^="add-to-cart"]').click();
       productsName.push(currentName);
-
     }
     return productsName;
   }
 
-  async addProductsWithoutList(n: number){
+  async addProductsWithoutList(n: number) {
     const items = this.page.locator('.inventory_item');
     const count = Math.min(n, await items.count());
 
     for (let i = 0; i < count; i++) {
       const currentItem = items.nth(i);
       await currentItem.locator('[data-test^="add-to-cart"]').click();
-
     }
   }
 
-  get productNames() { return this.productDetails; }
-  get productPrices() { return this.page.locator('.inventory_item_price'); }
+  get productNames() {
+    return this.productDetails;
+  }
+  get productPrices() {
+    return this.page.locator('.inventory_item_price');
+  }
 
   async getNames(): Promise<string[]> {
     return await this.productNames.allTextContents();
@@ -71,7 +73,6 @@ export class InventoryPage {
 
   async getPrices(): Promise<number[]> {
     const raw = await this.productPrices.allTextContents(); // ["$29.99", "$9.99", ...]
-    return raw.map(t => Number(t.replace('$','')));
+    return raw.map((t) => Number(t.replace('$', '')));
   }
-
 }
