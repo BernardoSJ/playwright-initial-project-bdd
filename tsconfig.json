@@ -9,12 +9,18 @@
       "@steps/*": ["src/steps/*"],
       "@support/*": ["src/support/*"],
       "@utils/*": ["utils/*"],
-      "@fixtures/*": ["fixtures/*"],
+      "@fixtures/*": ["fixtures/*"]
     },
     "types": ["node"],
     "esModuleInterop": true,
     "strict": true,
     "outDir": "dist"
   },
-  "include": ["src/**/*.ts", "pages/**/*.ts", "utils/**/*.ts", "features/**/*.ts", "fixtures/**/*.ts"]
+  "include": [
+    "src/**/*.ts",
+    "pages/**/*.ts",
+    "utils/**/*.ts",
+    "features/**/*.ts",
+    "fixtures/**/*.ts"
+  ]
 }

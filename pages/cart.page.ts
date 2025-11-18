@@ -12,10 +12,7 @@ export class CartPage {
   }
 
   async goToCart() {
-    await Promise.all([  
-      this.cartButton.click(),
-      this.page.waitForURL(/cart\.html$/),
-    ]);
+    await Promise.all([this.cartButton.click(), this.page.waitForURL(/cart\.html$/)]);
     await expect(this.page.locator('.title')).toHaveText('Your Cart');
     await expect(this.page).toHaveURL(/cart\.html$/);
   }
@@ -48,10 +45,11 @@ export class CartPage {
     ]);
   }
 
-  get productNames() { return this.page.locator('.inventory_item_name'); }
+  get productNames() {
+    return this.page.locator('.inventory_item_name');
+  }
 
   async getProductsNames(): Promise<string[]> {
     return await this.productNames.allTextContents();
   }
-
 }

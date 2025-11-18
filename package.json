@@ -12,10 +12,11 @@
     "typescript": "^5.9.3"
   },
   "scripts": {
-    "cucumber": "cucumber-js --require ./src/steps/**/*.ts --require ./src/support/**/*.ts",
-    "cucumber:smoke": "cucumber-js --tags '@smoke and not @wip'",
-    "cucumber:chromium": "cross-env BROWSER=chromium cucumber-js",
-    "cucumber:firefox": "cross-env BROWSER=firefox cucumber-js",
-    "cucumber:webkit": "cross-env BROWSER=webkit cucumber-js"
+    "cucumber": "cross-env TS_NODE_PROJECT=tsconfig.json cucumber-js",
+    "cucumber:chromium": "cross-env TS_NODE_PROJECT=tsconfig.json BROWSER=chromium cucumber-js",
+    "cucumber:firefox": "cross-env TS_NODE_PROJECT=tsconfig.json BROWSER=firefox cucumber-js",
+    "cucumber:webkit": "cross-env TS_NODE_PROJECT=tsconfig.json BROWSER=webkit cucumber-js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   }
 }

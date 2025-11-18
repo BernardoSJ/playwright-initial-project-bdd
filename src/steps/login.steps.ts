@@ -5,7 +5,6 @@ import { InventoryPage } from '@pages/inventory.page';
 
 Given('I am on the login page', async function () {
   await this.page.goto('/');
-  
 });
 
 When('I login with valid credentials', async function () {
