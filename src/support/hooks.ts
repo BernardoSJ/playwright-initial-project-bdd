@@ -1,5 +1,5 @@
 import { Before, After, Status } from '@cucumber/cucumber';
-import { chromium, firefox, webkit } from '@playwright/test'; // <- aquí el cambio
+import { chromium, firefox, webkit } from '@playwright/test';
 import { CustomWorld } from './world';
 import fs from 'node:fs';
 import path from 'node:path';
