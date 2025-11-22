@@ -1,6 +1,8 @@
 name: Playwright E2E Cucumber
 
 on:
+  workflow_dispatch:
+
   pull_request:
 
 jobs:
@@ -43,7 +45,7 @@ jobs:
           uses: actions/upload-artifact@v4
           with:
             name: playwright-checkout-report-chromium
-            path: reports/html
+            path: reports/cucumber
             if-no-files-found: warn
 
         - name: Upload traces & videos (checkout)
