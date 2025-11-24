@@ -112,7 +112,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: traces-and-videos
+          name: traces-and-videos-(${{ matrix.project }})
           path: |
             test-results/**/trace.zip
             test-results/**/*.webm
