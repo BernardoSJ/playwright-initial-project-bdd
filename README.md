@@ -27,6 +27,20 @@ Run the following commands in your terminal:
    npm run cucumber:chromium -- --tags @checkout
    ```
 
+## ⚙️ GitHub Actions CI
+
+This project includes a **GitHub Actions** workflow to run Playwright tests in CI.
+* Workflow name: **Playwright E2E Cucumber**.
+* Triggers: 
+   * **workflow_dispatch**.
+   * **push** to main.
+   * **pull_request** to main.
+* **PRs** executes only @checkout faster in chromium.
+* **Push/manual** matrix for browser (**Chromium**, **Firefox**, **WebKit**).
+* **Artifacts**:
+   * **HTML report** reports/cucumber.
+   * On failure after retry: **trace.zip** and **video.webm** (from test-results/**)
+
 
 ## 📊 Cucumber BDD Reports
 
