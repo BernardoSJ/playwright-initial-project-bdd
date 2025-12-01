@@ -72,7 +72,6 @@ playwright-initial-project-bdd/
   ├── features/             # End-to-end test specifications using Gherkin Language (Included network mocking with page.route)
   ├── fixtures/             # custom fixtures
   ├── utils/                # Data builder and helpers
-  ├── playwright.config.ts  # Playwright configuration file
   ├── package.json          # Dependencies and npm scripts
   ├── src
        ├── steps/           # Step implementation for the instructions defined within the .feature files
