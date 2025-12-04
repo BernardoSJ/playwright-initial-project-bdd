@@ -7,8 +7,7 @@ When('I sort the catalog by {string}', async function (option: 'az' | 'za' | 'lo
   await inventory.sortBy(option);
 });
 
-Then(
-  'the catalog should be sorted by {string}',
+Then('the catalog should be sorted by {string}',
   async function (option: 'az' | 'za' | 'lohi' | 'hilo') {
     const inventory = new InventoryPage(this.page);
 

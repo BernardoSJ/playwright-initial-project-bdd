@@ -55,7 +55,7 @@ jobs:
           if: always()
           uses: actions/upload-artifact@v4
           with:
-            name: traces-and-videos-smoke
+            name: traces-and-videos-checkout
             path: |
               test-results/**/trace.zip
               test-results/**/*.webm
