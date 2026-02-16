@@ -4,6 +4,9 @@
     "@faker-js/faker": "^10.0.0",
     "@playwright/test": "^1.55.1",
     "@types/node": "^24.5.2",
+    "allure-commandline": "^2.36.0",
+    "allure-cucumberjs": "^3.4.5",
+    "allure-js-commons": "^3.4.5",
     "cross-env": "^10.1.0",
     "playwright": "^1.55.1",
     "prettier": "^3.6.2",
@@ -17,6 +20,9 @@
     "cucumber:firefox": "cross-env TS_NODE_PROJECT=tsconfig.json BROWSER=firefox cucumber-js",
     "cucumber:webkit": "cross-env TS_NODE_PROJECT=tsconfig.json BROWSER=webkit cucumber-js",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "allure:serve": "allure serve allure-results"
   }
 }

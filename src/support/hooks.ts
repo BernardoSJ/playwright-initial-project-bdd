@@ -38,6 +38,9 @@ After(async function (this: CustomWorld, scenario) {
     } catch {}
   }
 
+  const png = await this.page.screenshot({ fullPage:true });
+  await this.attach(png, 'image/png');
+
   const video = this.page.video();
   await this.page.close();
   await this.context.close();

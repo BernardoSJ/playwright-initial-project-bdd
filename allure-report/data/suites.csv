@@ -1,0 +1,31 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"As a user
+  I want to checkout with random customer data
+  So that I can validate a successful order completion","1820","Non happy checkout","","2026-02-16","passed","2026-02-16","","","",""
+"As a user
+  I want to add and remove products
+  So that I can manage my cart","5881","Remove one product and validate empty badge","","2026-02-16","passed","2026-02-16","","","",""
+"As a user
+  I want to sort the catalog
+  So that I can see items ordered correctly","1589","Sort catalog by hilo","","2026-02-16","passed","2026-02-16","","","",""
+"As a user
+  I want to add and remove products
+  So that I can manage my cart","5909","Add 2 products and verify badge and names","","2026-02-16","passed","2026-02-16","","","",""
+"As a tester
+  I want to mock a /api/users response
+  So that I can validate the UI against a fake backend","1530","Render mocked users from /api/users","","2026-02-16","passed","2026-02-16","","","",""
+"As a user
+  I want to sort the catalog
+  So that I can see items ordered correctly","1655","Sort catalog by az","","2026-02-16","passed","2026-02-16","","","",""
+"As a user
+  I want to checkout with random customer data
+  So that I can validate a successful order completion","1912","Happy checkout","","2026-02-16","passed","2026-02-16","","","",""
+"As a user
+  I want to sort the catalog
+  So that I can see items ordered correctly","1679","Sort catalog by lohi","","2026-02-16","passed","2026-02-16","","","",""
+"As a valid user
+  I want to log in successfully
+  So that I can access the inventory page","1616","Successful Login","","2026-02-16","passed","2026-02-16","","","",""
+"As a user
+  I want to sort the catalog
+  So that I can see items ordered correctly","1549","Sort catalog by za","","2026-02-16","passed","2026-02-16","","","",""
