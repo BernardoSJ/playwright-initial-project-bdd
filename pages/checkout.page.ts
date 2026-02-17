@@ -30,6 +30,8 @@ export class CheckoutPage {
       this.continueButton.click(),
     ]);
     await expect(this.finishButton).toBeVisible();
+    let test = 30;
+    expect(test).toBe(27);
   }
 
   async clickFinishButton() {

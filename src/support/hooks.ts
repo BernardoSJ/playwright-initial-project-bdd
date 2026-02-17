@@ -17,39 +17,69 @@ Before(async function (this: CustomWorld) {
   this.page = await this.context.newPage();
   this.page.setDefaultTimeout(5_000);
   this.page.setDefaultNavigationTimeout(15_000);
-  if (process.env.TRACE === '1') {
-    await this.context.tracing.start({ screenshots: true, snapshots: true, sources: true });
+  
+  if (process.env.CI === 'true' || process.env.TRACE === '1') {
+    await this.context.tracing.start({
+      screenshots: true,
+      snapshots: true,
+      sources: true,
+    });
   }
 });
 
 After(async function (this: CustomWorld, scenario) {
-  const failed = scenario.result?.status === Status.FAILED;
+  const failed = scenario.result?.status !== Status.PASSED;
   const slug = scenario.pickle.name.replace(/[^\w\d-_]+/g, '_').slice(0, 80);
 
-  if (failed || process.env.TRACE === '1') {
-    const out = path.join('test-results', 'traces', `${slug}.zip`);
-    fs.mkdirSync(path.dirname(out), { recursive: true });
+  // --- TRACE ---
+  let tracePath: string | null = null;
+
+  const shouldTraceHaveFile = failed || process.env.TRACE === '1' || process.env.CI === 'true';
+
+  if (shouldTraceHaveFile) {
+    tracePath = path.join('test-results', 'traces', `${slug}.zip`);
+    fs.mkdirSync(path.dirname(tracePath), { recursive: true });
     try {
-      await this.context.tracing.stop({ path: out });
-    } catch {}
+      await this.context.tracing.stop({ path: tracePath });
+    } catch {
+      tracePath = null;
+    }
   } else {
     try {
       await this.context.tracing.stop();
     } catch {}
   }
 
-  const png = await this.page.screenshot({ fullPage:true });
-  await this.attach(png, 'image/png');
+  // --- SCREENSHOT ---
+  if (failed) {
+    const png = await this.page.screenshot({ fullPage: true });
+    await this.attach(png, 'image/png');
+  }
 
+  // --- VIDEO ---
   const video = this.page.video();
+
   await this.page.close();
   await this.context.close();
   await this.browser.close();
 
+  let videoPath: string | null = null;
+
   if (video && failed) {
     const src = await video.path();
-    const dest = path.join('test-results', 'videos', `${slug}.webm`);
-    fs.mkdirSync(path.dirname(dest), { recursive: true });
-    fs.renameSync(src, dest);
+    videoPath = path.join('test-results', 'videos', `${slug}.webm`);
+    fs.mkdirSync(path.dirname(videoPath), { recursive: true });
+    fs.renameSync(src, videoPath);
+  }
+
+  // --- ATTACH TRACE + VIDEO TO ALLURE (via Cucumber attach) ---
+  if (failed && tracePath && fs.existsSync(tracePath)) {
+    const traceBuffer = fs.readFileSync(tracePath);
+    await this.attach(traceBuffer, 'application/zip');
+  }
+
+  if (failed && videoPath && fs.existsSync(videoPath)) {
+    const videoBuffer = fs.readFileSync(videoPath);
+    await this.attach(videoBuffer, 'video/webm');
   }
 });
