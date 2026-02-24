@@ -43,23 +43,17 @@ jobs:
         - name: Run Checkout tests (chromium)
           run: npm run cucumber:chromium -- --tags @checkout
 
-        - name: Upload HTML report (checkout)
+        - name: Generate Allure Report
           if: always()
-          uses: actions/upload-artifact@v4
-          with:
-            name: playwright-checkout-report-chromium
-            path: reports/cucumber
-            if-no-files-found: warn
+          run: npm run allure:generate
 
-        - name: Upload traces & videos (checkout)
+        - name: Upload Allure Report
           if: always()
           uses: actions/upload-artifact@v4
           with:
-            name: traces-and-videos-checkout
-            path: |
-              test-results/**/trace.zip
-              test-results/**/*.webm
-            if-no-files-found: ignore
+            name: allure-chechout-report
+            path: allure-results
+            if-no-files-found: warn
 
   e2e-matrix:
     if: github.event_name != 'pull_request'
@@ -99,21 +93,14 @@ jobs:
       - name: Run tests (${{ matrix.project }})
         run: npm run cucumber:${{ matrix.project }}
 
-      - name: Upload HTML report (${{ matrix.project }})
+      - name: Generate Allure Report
+        if: always()
+        run: npm run allure:generate
+
+      - name: Upload Allure Report 
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-html-report-(${{ matrix.project }})
-          path: reports/cucumber
+          name: allure-report-(${{ matrix.project }})
+          path: allure-results
           if-no-files-found: warn
-
-
-      - name: Upload traces & videos (${{ matrix.project }})
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: traces-and-videos-(${{ matrix.project }})
-          path: |
-            test-results/**/trace.zip
-            test-results/**/*.webm
-          if-no-files-found: ignore
