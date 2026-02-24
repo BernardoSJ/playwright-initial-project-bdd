@@ -15,8 +15,8 @@ Before(async function (this: CustomWorld) {
     recordVideo: { dir: 'test-results/videos' },
   });
   this.page = await this.context.newPage();
-  this.page.setDefaultTimeout(5_000);
-  this.page.setDefaultNavigationTimeout(15_000);
+  this.page.setDefaultTimeout(process.env.CI === 'true' ? 15_000 : 5_000);
+  this.page.setDefaultNavigationTimeout(process.env.CI === 'true' ? 45_000 : 15_000);
   
   if (process.env.CI === 'true' || process.env.TRACE === '1') {
     await this.context.tracing.start({
