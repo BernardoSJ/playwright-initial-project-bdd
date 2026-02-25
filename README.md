@@ -44,17 +44,23 @@ This project includes a **GitHub Actions** workflow to run Playwright tests in C
 
 ## 📊 Cucumber BDD Reports
 
-Every cucumber execution automatically generates:
+Every cucumber execution generates an **Allure HTML report** under:
 
-* Console output with "progress" format
-* HTML Report Under:
-   ```bash
-   reports/cucumber/index.html
-   ```
-* JSON Report Under:
-   ```bash
-   reports/cucumber/report.json
-   ```
+```bash
+allure-report
+```
+⚠️ Do not open the report by double-click index.html.
+This may cause the UI to stay in Loading... due to browser security restrictions.
+Instead open it using:
+```bash
+npm run allure:open
+```
+This starts a local server and renders the report correctly.
+
+### CI Behavior
+
+If a scenario fails, the pipeline job will fail with exit code 1.
+Howevertest artifacts (Allure results, reports, traces, videos) are always uploaded using if: always()
 
 ## ✅ Current Test Coverage
 
